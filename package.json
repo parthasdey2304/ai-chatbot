@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/parthasdey2304/ai-chatbot/issues"
   },
-  "homepage": "https://github.com/parthasdey2304/ai-chatbot#readme"
+  "homepage": "https://github.com/parthasdey2304/ai-chatbot#readme",
+  "dependencies": {
+    "react-router-dom": "^6.22.1"
+  }
 }
