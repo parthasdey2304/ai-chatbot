@@ -1,6 +1,22 @@
 import { useState } from 'react';
 
 function App() {
+  const [input, setInput] = useState('');
+  const [chatLog, setChatLog] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // Update the chat log
+    setChatLog([...chatLog, { user: "me", message: input }]);
+    // Clear the input field after submission
+    setInput('');
+    console.log("Submitted");
+  }
+
+  function handleInputChange(e) {
+    setInput(e.target.value);
+  }
+
   return (
     <div className="">
       <span className="material-symbols-outlined absolute md:hidden top-3 left-3 text-white text-4xl">side_navigation</span>
@@ -12,31 +28,7 @@ function App() {
           </div>
 
           <div className='w-full h-[89%] flex-col space-y-1 pr-4 overflow-y-auto'>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
-            <div className='bg-white w-full h-[50px] rounded-tr-xl rounded-br-xl'></div>
+            {/* Chat history components */}
           </div>
         </aside>
 
@@ -47,31 +39,21 @@ function App() {
 
           <div className='flex-col w-full h-[80%] px-4 lg:px-28 py-4 lg:py-10'>
             <div className='bg-white w-full h-full rounded-2xl overflow-y-auto flex-col space-y-2 px-4 py-2'>
-              <div className='bg-gray-800 w-full h-[100px] rounded-2xl'></div>
-              <div className='bg-black w-full h-[300px] rounded-2xl'></div>
-              <div className='bg-gray-800 w-full h-[100px] rounded-2xl'></div>
-              <div className='bg-black w-full h-[300px] rounded-2xl'></div>
-              <div className='bg-gray-800 w-full h-[100px] rounded-2xl'></div>
-              <div className='bg-black w-full h-[300px] rounded-2xl'></div>
-              <div className='bg-gray-800 w-full h-[100px] rounded-2xl'></div>
-              <div className='bg-black w-full h-[300px] rounded-2xl'></div>
-              <div className='bg-gray-800 w-full h-[100px] rounded-2xl'></div>
-              <div className='bg-black w-full h-[300px] rounded-2xl'></div>
+              {/* Chat messages */}
             </div>
           </div>
 
           <div className='w-full h-[10%] flex justify-center items-center px-4 lg:px-28'>
             <div className='w-full max-h-48 border border-white rounded-2xl flex justify-between items-center'>
-              <div 
-                id='prompt_input_box' 
-                className='w-full h-full text-white px-4 py-2.5 text-xl focus:outline-none font-["Poppins"] overflow-y-auto'
-                placeholder='Enter your prompt.'
-                style={{ maxHeight: '100px' }}
-                contentEditable="true"
-              >
-                Enter your prompt..
-              </div>
-
+              <form onSubmit={handleSubmit} className='w-full'>
+                <input 
+                  id='prompt_input_box' 
+                  className='bg-zinc-800 w-full h-full text-white px-4 py-2.5 text-xl focus:outline-none font-["Poppins"] overflow-y-auto rounded-2xl'
+                  placeholder='Enter your prompt.'
+                  value={input}
+                  onChange={handleInputChange} // Add onChange handler
+                />
+              </form>
               <div>
                 <button className='px-2 py-1 text-white flex justify-center items-end bg-blue-600 hover:bg-blue-800 duration-300 hover:duration-300 rounded-2xl'>
                   <span className="material-symbols-outlined text-3xl">send</span>
@@ -82,7 +64,7 @@ function App() {
         </section>
       </div>
     </div>
-  )
+  );
 }
 
 export default App;
